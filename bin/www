@@ -1,0 +1,12 @@
+#! /usr/bin/env node
+// @flow
+
+const prod = process.env.NODE_ENV === 'production'
+
+const {default: app} = prod ? require('../dist') : require('../src')
+
+const portR = parseInt(process.env.PORT)
+
+const port = isNaN(portR) ? 3000 : portR
+
+app.listen(port)

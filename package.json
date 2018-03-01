@@ -1,0 +1,39 @@
+{
+  "name": "budde377-io",
+  "version": "0.0.1",
+  "description": "Website for budde377.io",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "eslint . && flow",
+    "build": "babel src -d dist",
+    "start": "./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/budde377/budde377-io.git"
+  },
+  "author": "Christian Budde Christensen <budde377@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/budde377/budde377-io/issues"
+  },
+  "homepage": "https://github.com/budde377/budde377-io#readme",
+  "dependencies": {
+    "koa": "^2.5.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "escope": "^3.6.0",
+    "eslint": "^4.18.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-config-standard-flow": "^1.0.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "flow-bin": "^0.66.0"
+  }
+}
