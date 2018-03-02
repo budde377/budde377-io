@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>budde377.io</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        body {
+            background-color: #bd6c98;
+            font-family: "Open Sans", Verdana, sans-serif;
+            color: #fff;
+            font-size: 12pt;
+            text-align: center;
+            position: relative;
+            height: 100%;
+            transition: 2s background-color linear;
+        }
+
+        a {
+            position: absolute;
+            margin-top: -1.5em;
+            top: 50%;
+            width: 10em;
+            left: 50%;
+            margin-left: -5em;
+            height: 3em;
+            line-height: 3em;
+            display: block;
+            font-size: 2em;
+            color: #ffffff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<a href="mailto:me@budde377.io">
+    me@budde377.io
+</a>
+<script>
+  const body = document.body
+
+  function randomColor () {
+    const h = Math.floor(Math.random() * 360)
+    const s = '62%'
+    const l = '64%'
+    return 'hsl(' + h + ', ' + s + ', ' + l + ')'
+  }
+  body.style.backgroundColor = randomColor()
+  setInterval(function () {
+    body.style.backgroundColor = randomColor()
+  }, 2000)
+</script>
+</body>
+</html>
