@@ -3,6 +3,11 @@ port:
   __format: json
 
 server:
-  keys:
-    __name: SERVER_KEYS
-    __format: json
+  key: SERVER_KEY
+
+auth:
+  clientSecret: AUTH_CLIENT_SECRET
+  redirectUri: AUTH_REDIRECT_URI
+
+redis:
+  host: REDIS_HOST

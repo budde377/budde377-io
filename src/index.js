@@ -12,7 +12,7 @@ import qs from 'querystring'
 
 const app = new Koa()
 
-app.keys = config.get('server.keys')
+app.keys = [config.get('server.key')]
 
 app.use(session({...config.session, store: new RedisStore()}, app))
 

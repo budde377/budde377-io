@@ -2,7 +2,7 @@
 import redis from 'redis'
 import config from 'config'
 
-const client = redis.createClient(config.redis)
+const client = redis.createClient(config.get('redis'))
 
 function get (key: string): Promise<?string> {
   return new Promise((resolve, reject) => {

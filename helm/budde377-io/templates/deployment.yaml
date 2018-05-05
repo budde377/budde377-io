@@ -22,6 +22,20 @@ spec:
           env:
             - name: PORT
               value: {{ .Values.service.internalPort | quote }}
+            - name: AUTH_REDIRECT_URI
+              value: {{ .Values.auth.redirectUri | quote }}
+            - name: REDIS_HOST
+              value: {{ .Values.redis.host | quote }}
+            - name: SERVER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "budde377-io.fullname" . }}
+                  key: serverKey
+            - name: AUTH_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "budde377-io.fullname" . }}
+                  key: authClientSecret
           ports:
             - containerPort: {{ .Values.service.internalPort }}
           livenessProbe:

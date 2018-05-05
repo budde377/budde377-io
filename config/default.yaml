@@ -14,5 +14,7 @@ session:
   maxAge: 86400000
 
 server:
-  keys:
-    - foobar
+  key: foobar
+
+redis:
+  host: localhost

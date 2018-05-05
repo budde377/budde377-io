@@ -14,8 +14,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm i \
-&&  npm run build
+RUN npm i
 
 ENTRYPOINT ["npm"]
 CMD ["start"]
