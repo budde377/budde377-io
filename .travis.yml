@@ -8,9 +8,17 @@ services:
 node_js:
 - 9
 before_install:
+- apt-get update && apt-get install -y apt-transport-https
+- curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+- cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+  deb http://apt.kubernetes.io/ kubernetes-xenial main
+  EOF
+- apt-get update
+- apt-get install -y kubectl
+- npm i -g npm
 - npm install -g greenkeeper-lockfile@1
 install:
-- npm i
+- npm ci
 before_script: greenkeeper-lockfile-update
 script: npm test
 after_script: greenkeeper-lockfile-upload

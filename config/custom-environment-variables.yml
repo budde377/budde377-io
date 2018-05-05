@@ -1,0 +1,8 @@
+port:
+  __name: PORT
+  __format: json
+
+server:
+  keys:
+    __name: SERVER_KEYS
+    __format: json
