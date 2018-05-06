@@ -1,30 +1,30 @@
 # Default values for budde377-io.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
+
 replicaCount: 1
+
 image:
   repository: budde377/budde377-io
   tag: latest
   pullPolicy: IfNotPresent
+
 service:
-  name: budde377-io
   type: ClusterIP
-  externalPort: 3000
-  internalPort: 3000
+  port: 3000
+
 ingress:
   enabled: true
-  # Used to create an Ingress record.
+  path: /
+  provider:
+    server: https://acme-v01.api.letsencrypt.org/directory
+    email: budde377@gmail.com
   hosts:
     - budde377.io
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    certmanager.k8s.io/issuer: letsencrypt-prod
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    # kubernetes.io/tls-acme: "true"
   tls:
-    - secretName: letsencrypt-prod
-      hosts:
+    - hosts:
         - budde377.io
+
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
@@ -37,12 +37,19 @@ resources: {}
   #  cpu: 100m
   #  memory: 128Mi
 
-secret:
-  serverKey: FOOBAR
-  authClientSecret: FOOBAR
+nodeSelector: {}
 
-redis:
-  host: redis-redis-cache.redis
+tolerations: []
+
+affinity: {}
+
 
 auth:
   redirectUri: https://budde377.io/auth/callback
+  clientSecret: ABC
+
+server:
+  key: ABC
+
+redis:
+  host: redis-redis-cache.redis.svc.cluster.local

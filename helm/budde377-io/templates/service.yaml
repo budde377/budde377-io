@@ -4,16 +4,15 @@ metadata:
   name: {{ template "budde377-io.fullname" . }}
   labels:
     app: {{ template "budde377-io.name" . }}
-    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    chart: {{ template "budde377-io.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.externalPort }}
-      targetPort: {{ .Values.service.internalPort }}
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
       protocol: TCP
-      name: {{ .Values.service.name }}
   selector:
     app: {{ template "budde377-io.name" . }}
     release: {{ .Release.Name }}

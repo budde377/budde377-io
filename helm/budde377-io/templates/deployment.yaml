@@ -21,7 +21,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: PORT
-              value: {{ .Values.service.internalPort | quote }}
+              value: {{ .Values.service.port | quote }}
             - name: AUTH_REDIRECT_URI
               value: {{ .Values.auth.redirectUri | quote }}
             - name: REDIS_HOST
@@ -37,15 +37,15 @@ spec:
                   name: {{ template "budde377-io.fullname" . }}
                   key: authClientSecret
           ports:
-            - containerPort: {{ .Values.service.internalPort }}
+            - containerPort: {{ .Values.service.port }}
           livenessProbe:
             httpGet:
               path: /
-              port: {{ .Values.service.internalPort }}
+              port: {{ .Values.service.port }}
           readinessProbe:
             httpGet:
               path: /
-              port: {{ .Values.service.internalPort }}
+              port: {{ .Values.service.port }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- if .Values.nodeSelector }}

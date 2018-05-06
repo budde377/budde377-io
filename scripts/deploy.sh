@@ -24,14 +24,14 @@ users:
   user:
     token: ${KUBERNETES_TOKEN}
 " > ~/.kube/config
-kubectl config view
+
 npm run build
 docker build -t budde377/budde377-io:$TRAVIS_COMMIT .
 docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 docker push budde377/budde377-io:$TRAVIS_COMMIT
 
-helm upgrade --wait --timeout 300 \
+helm upgrade --wait --timeout 300 -i \
   --set image.tag=$TRAVIS_COMMIT \
-  --set secret.serverKey=$SERVER_KEY \
-  --set secret.authClientSecret=$AUTH_CLIENT_SECRET \
+  --set server.key=$SERVER_KEY \
+  --set auth.clientSecret=$AUTH_CLIENT_SECRET \
   budde377-io ./helm/budde377-io

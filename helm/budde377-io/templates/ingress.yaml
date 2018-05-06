@@ -1,32 +1,39 @@
 {{- if .Values.ingress.enabled -}}
-{{- $serviceName := include "budde377-io.fullname" . -}}
-{{- $servicePort := .Values.service.externalPort -}}
+{{- $fullName := include "budde377-io.fullname" . -}}
+{{- $port := .Values.service.port }}
+{{- $ingressPath := .Values.ingress.path -}}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: {{ template "budde377-io.fullname" . }}
+  name: {{ $fullName }}
   labels:
     app: {{ template "budde377-io.name" . }}
-    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    chart: {{ template "budde377-io.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
   annotations:
-    {{- range $key, $value := .Values.ingress.annotations }}
-      {{ $key }}: {{ $value | quote }}
-    {{- end }}
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    certmanager.k8s.io/issuer: {{ $fullName }}
 spec:
+{{- if .Values.ingress.tls }}
+  tls:
+  {{- range .Values.ingress.tls }}
+    - hosts:
+      {{- range .hosts }}
+        - {{ . }}
+      {{- end }}
+      secretName: {{ $fullName }}-tls
+  {{- end }}
+{{- end }}
   rules:
-    {{- range $host := .Values.ingress.hosts }}
-    - host: {{ $host }}
+  {{- range .Values.ingress.hosts }}
+    - host: {{ . }}
       http:
         paths:
-          - path: /
+          - path: {{ $ingressPath }}
             backend:
-              serviceName: {{ $serviceName }}
-              servicePort: {{ $servicePort }}
-    {{- end -}}
-  {{- if .Values.ingress.tls }}
-  tls:
-{{ toYaml .Values.ingress.tls | indent 4 }}
-  {{- end -}}
-{{- end -}}
+              serviceName: {{ $fullName }}
+              servicePort: {{ $port }}
+  {{- end }}
+{{- end }}

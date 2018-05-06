@@ -4,7 +4,7 @@
   "description": "Website for budde377.io",
   "main": "src/index.js",
   "scripts": {
-    "test": "eslint . && flow",
+    "test": "helm lint helm/budde377-io && eslint . && flow",
     "build": "babel src -d dist",
     "start": "NODE_ENV=production node dist",
     "dev": "NODE_ENV=development babel-node src"
