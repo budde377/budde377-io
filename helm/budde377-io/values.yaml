@@ -21,11 +21,9 @@ ingress:
     email: budde377@gmail.com
   hosts:
     - budde377.io
-    - heft.app
   tls:
     - hosts:
         - budde377.io
-        - heft.app
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
