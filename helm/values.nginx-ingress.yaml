@@ -1,5 +1,6 @@
 controller:
   service:
+    clusterIP: 10.109.172.166
     type: NodePort
     nodePorts:
       http: 30080
