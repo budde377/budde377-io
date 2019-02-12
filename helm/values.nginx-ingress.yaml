@@ -5,5 +5,10 @@ controller:
       http: 30080
       https: 30443
     externalTrafficPolicy: Local
+  config:
+    hsts: "true"
+    hsts-include-subdomains: "false"
+    hsts-max-age: "604800"
+    hsts-preload: "false"
 rbac:
   create: true
